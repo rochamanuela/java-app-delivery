@@ -5,7 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Input extends JTextField {
-    public Input(){
+    public Input(String text){
         super();
         this.setOpaque(false);
         this.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -1,10 +1,7 @@
 package Screens;
-
 import Components.Button;
 
 import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 import javax.swing.ImageIcon;
@@ -22,7 +19,7 @@ public class HomeScreen extends JFrame {
         initializeComponents();
     }
 
-    private Button createButton(Container container, int x, int y, int width, int height) {
+    public Button createButton(Container container, int x, int y, int width, int height) {
         Button button = new Button();
         button.setBounds(x, y, width, height);
         container.add(button);
@@ -34,7 +31,7 @@ public class HomeScreen extends JFrame {
         frame.setLayout(null);
 
         // Load the background image
-        ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/1_home_screen.png")));
+        ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/pagina_inicial.png")));
         background = new JLabel(wallpaper);
         background.setBounds(-5, -30, 1006, 757);
         frame.add(background);
@@ -45,9 +42,11 @@ public class HomeScreen extends JFrame {
         btnLoginClient = createButton(frame, 519, 494, 124, 35);
         btnRegisterClient = createButton(frame, 649, 494, 124, 35);
 
-
         // Add action listeners to the buttons
         btnLoginRestaurant.addActionListener(e -> showLoginRestaurantScreen());
+        btnRegisterRestaurant.addActionListener(e -> showLoginRestaurantScreen());
+        btnLoginClient.addActionListener(e -> showLoginRestaurantScreen());
+        btnRegisterClient.addActionListener(e -> showLoginRestaurantScreen());
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1006, 757);

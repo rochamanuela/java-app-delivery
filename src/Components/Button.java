@@ -2,7 +2,6 @@ package Components;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Cursor;
 
 public class Button extends JButton {
     public Button(){

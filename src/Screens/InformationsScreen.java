@@ -10,13 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-public class LoginRestaurantScreen extends JFrame {
+public class InformationsScreen extends JFrame {
     Button btnLogin, btnHome;
-    Input cnpjInput, senhaInput;
     JLabel background;
 
-    public LoginRestaurantScreen(){
-        super("App Delivery - Login Restaurant");
+    public InformationsScreen(){
+        super("App Delivery - Informations");
         initializeComponents();
     }
 
@@ -27,29 +26,16 @@ public class LoginRestaurantScreen extends JFrame {
         return button;
     }
 
-    public Input createInput (JLabel label, int x, int y, int width, int height, String text) {
-        Input input = new Input(text);
-        input.setBounds(x, y, width, height);
-        label.add(input);
-        return input;
-    }
-
     private void initializeComponents(){
         Container frame = getContentPane();
         frame.setLayout(null);
 
-        ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/login_do_restaurante.png")));
+        ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/infos_do_app.png")));
         background = new JLabel(wallpaper);
         background.setBounds(-5, -20, 656, 480);
         frame.add(background);
 
-        String placeholderText = "Digite algo aqui";
-        cnpjInput = createInput(background, 235, 181, 201, 35, placeholderText);
-        senhaInput = createInput(background, 235, 246, 201, 35, "senha");
-
-        btnLogin = createButton(background, 219, 301, 201, 35);
         btnHome = createButton(background, 40, 37, 34, 34);
-        btnInfos = createButton(background, 40, 37, 34, 34);
 
         // Add action listeners to the buttons
         btnHome.addActionListener(e -> showHomeScreen());
@@ -68,6 +54,6 @@ public class LoginRestaurantScreen extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginRestaurantScreen::new);
+        SwingUtilities.invokeLater(InformationsScreen::new);
     }
 }
