@@ -1,5 +1,6 @@
 package Screens;
 import Components.Button;
+import Components.Input;
 
 import java.awt.Container;
 import java.util.Objects;
@@ -9,11 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-public class InformationsScreen extends JFrame {
-    Button btnLogin, btnHome;
+public class InfosScreen extends JFrame {
+    Button btnLogin, btnHome, btnInfos;
+    Input cnpjInput, senhaInput;
     JLabel background;
 
-    public InformationsScreen(){
+    public InfosScreen(){
         super("App Delivery - Informations");
         initializeComponents();
     }
@@ -53,6 +55,6 @@ public class InformationsScreen extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(InformationsScreen::new);
+        SwingUtilities.invokeLater(InfosScreen::new);
     }
 }

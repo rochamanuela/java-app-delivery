@@ -16,7 +16,7 @@ public class HomeScreen extends JFrame {
 
     public HomeScreen() {
         super("App Delivery");
-        initializeComponents();
+        initializeComponents(); 
     }
 
     public Button createButton(Container container, int x, int y, int width, int height) {
@@ -44,9 +44,9 @@ public class HomeScreen extends JFrame {
 
         // Add action listeners to the buttons
         btnLoginRestaurant.addActionListener(e -> showLoginRestaurantScreen());
-        btnRegisterRestaurant.addActionListener(e -> showLoginRestaurantScreen());
-        btnLoginClient.addActionListener(e -> showLoginRestaurantScreen());
-        btnRegisterClient.addActionListener(e -> showLoginRestaurantScreen());
+        btnRegisterRestaurant.addActionListener(e -> showRegisterRestaurantScreen());
+        btnLoginClient.addActionListener(e -> showLoginClientScreen());
+        btnRegisterClient.addActionListener(e -> showRegisterClientScreen());
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1006, 757);
@@ -59,6 +59,24 @@ public class HomeScreen extends JFrame {
         dispose(); // Close the current screen
         LoginRestaurantScreen loginRestaurant = new LoginRestaurantScreen();
         loginRestaurant.setVisible(true);
+    }
+
+    private void showRegisterRestaurantScreen() {
+        dispose(); // Close the current screen
+        RegisterRestaurantScreen registerRestaurant = new RegisterRestaurantScreen();
+        registerRestaurant.setVisible(true);
+    }
+
+    private void showLoginClientScreen() {
+        dispose(); // Close the current screen
+        LoginClientScreen loginClient = new LoginClientScreen();
+        loginClient.setVisible(true);
+    }
+
+    private void showRegisterClientScreen() {
+        dispose(); // Close the current screen
+        RegisterClientScreen registerClient = new RegisterClientScreen();
+        registerClient.setVisible(true);
     }
 
     public static void main(String[] args) {
