@@ -2,6 +2,7 @@ package Screens;
 
 import Components.Button;
 import Components.Input;
+import Entities.Application;
 import Entities.Client;
 
 import java.awt.Container;
@@ -45,7 +46,7 @@ public class LoginClientScreen extends JFrame {
         frame.setLayout(null);
 
         ImageIcon wallpaper = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource("../Images/login_do_cliente.png")));
+        Objects.requireNonNull(getClass().getResource("../Images/login_do_cliente.png")));
         background = new JLabel(wallpaper);
         background.setBounds(-5, -20, 656, 480);
         frame.add(background);
@@ -69,14 +70,16 @@ public class LoginClientScreen extends JFrame {
 
             System.out.println("CPF: " + cpf + " Senha: " + password);
 
-            if (isLoginValid(cpf, password, null)) {
+            if (Application.clients.contains(new Client(null, cpf, password, 0, 0))) {
                 // Login bem-sucedido
                 // Execute ação de login
                 // Por exemplo: new HomeScreen(authenticatedClient).setVisible(true);
+                System.out.println("o login deu certo");
+                
                 dispose(); // Close the current screen
                 InfosScreen infosScreen = new InfosScreen();
                 infosScreen.setVisible(true);
-                System.out.println("o login deu certo");
+                
             } else {
                 // Login falhou
                 // Exiba uma mensagem de erro ou ação apropriada
@@ -91,21 +94,7 @@ public class LoginClientScreen extends JFrame {
         setVisible(true);
     }
 
-    public boolean isLoginValid(String cpf, String password, ArrayList<Client> clients) {
-        if (cpf == null || password == null) {
-            throw new IllegalArgumentException("Null arguments are not allowed.");
-        }
     
-        for (Client client : clients) {
-            if (client != null && client.getCpf() != null && client.getPassword() != null) {
-                if (client.getCpf().equals(cpf) && client.getPassword().equals(password)) {
-                    return true; // Autenticação bem-sucedida
-                }
-            }
-        }
-    
-        return false; // Autenticação falhou
-    }
     
 
     private void showHomeScreen() {

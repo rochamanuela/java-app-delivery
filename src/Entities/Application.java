@@ -54,14 +54,16 @@ public class Application {
         clients.add(userAdmin);
         restaurants.add(resAdmin);*/
 
-        LoginClientScreen loginClient = new LoginClientScreen();
-        loginClient.initializeComponents();
-
+        
         Client defaultClient = new Client(null, "adminClient" , "admin123", 0, 0);
         Restaurant defaultRestaurant = new Restaurant(null, "adminRestaurant", "admin123", 0, 0);
 
         clients.add(defaultClient);
         restaurants.add(defaultRestaurant);
 
+        LoginClientScreen loginClient = new LoginClientScreen();
+        loginClient.initializeComponents();
+
+        
     }
 }
