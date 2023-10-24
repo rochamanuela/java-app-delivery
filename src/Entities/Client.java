@@ -1,12 +1,13 @@
 package Entities;
 
-public class Restaurant {
-    private String name, cnpj, password;
+public class Client {
+    // this is the class that corresponds to the user class
+    private String name, cpf, password;
     private int positionX, positionY;
-
-    public Restaurant(String name, String cnpj, String password, int positionX, int positionY) {
+    
+    public Client(String name, String cpf, String password, int positionX, int positionY) {
         this.name = name;
-        this.cnpj = cnpj;
+        this.cpf = cpf;
         this.password = password;
         this.positionX = positionX;
         this.positionY = positionY;
@@ -16,8 +17,8 @@ public class Restaurant {
         return name;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getCpf() {
+        return cpf;
     }
 
     public String getPassword() {
@@ -30,17 +31,5 @@ public class Restaurant {
 
     public int getPositionY() {
         return positionY;
-    }
-
-    public void printMenu(){
-
-    }
-
-    public void addSnack(){
-
-    }
-
-    public void removeSnack(){
-
     }
 }
