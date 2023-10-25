@@ -13,6 +13,8 @@ public class HomeRestaurantScreen extends JFrame {
     Button btnDish, btnResume, btnHome;
     JLabel background;
 
+    Container frame = getContentPane();
+
     public HomeRestaurantScreen(){
         super("App Delivery - Home");
         initializeComponents();
@@ -26,7 +28,6 @@ public class HomeRestaurantScreen extends JFrame {
     }
 
     private void initializeComponents(){
-        Container frame = getContentPane();
         frame.setLayout(null);
 
         ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/inicial_restaurante.png")));
@@ -41,12 +42,15 @@ public class HomeRestaurantScreen extends JFrame {
         // Add action listeners to the buttons
         btnHome.addActionListener(e -> showHomeScreen());
         btnDish.addActionListener(e -> showRegisterDishScreen());
+    }
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(656, 480);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        setVisible(true);
+    public void open() {
+        HomeRestaurantScreen frame = new HomeRestaurantScreen();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(656, 480);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 
     private void showHomeScreen() {

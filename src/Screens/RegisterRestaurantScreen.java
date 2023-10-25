@@ -1,19 +1,20 @@
 package Screens;
 import Components.Button;
 import Components.Input;
+import Entities.Application;
+import Entities.Restaurant;
 
 import java.awt.Container;
 import java.util.Objects;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class RegisterRestaurantScreen extends JFrame {
     Button btnRegister, btnHome, btnClient;
-    Input senhaInput, nameInput, cnpjInput, xInput, yInput;
+    Input passwordInput, nameInput, cnpjInput, xInput, yInput;
     JLabel background;
+
+    Container frame = getContentPane();
 
     public RegisterRestaurantScreen(){
         super("App Delivery - Register Restaurant");
@@ -35,7 +36,6 @@ public class RegisterRestaurantScreen extends JFrame {
     }
 
     private void initializeComponents(){
-        Container frame = getContentPane();
         frame.setLayout(null);
 
         ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/cadastrar_restaurante.png")));
@@ -44,11 +44,11 @@ public class RegisterRestaurantScreen extends JFrame {
         frame.add(background);
 
         String placeholderText = "Digite algo aqui";
-        nameInput = createInput(background, 298, 109, 289, 35, placeholderText);
-        cnpjInput = createInput(background, 298, 174, 163, 35, "cnpj");
-        senhaInput = createInput(background, 450, 174, 163, 35, "senha");
-        xInput = createInput(background, 298, 237, 163, 35, "x");
-        yInput = createInput(background, 450, 237, 163, 35, "y");
+        nameInput = createInput(background, 298, 113, 289, 35, placeholderText);
+        cnpjInput = createInput(background, 298, 178, 163, 35, "cnpj");
+        passwordInput = createInput(background, 450, 178, 163, 35, "senha");
+        xInput = createInput(background, 298, 241, 163, 35, "x");
+        yInput = createInput(background, 450, 241, 163, 35, "y");
 
         btnRegister = createButton(background, 298, 288, 300, 35);
         btnHome = createButton(background, 40, 37, 34, 34);
@@ -58,11 +58,46 @@ public class RegisterRestaurantScreen extends JFrame {
         btnHome.addActionListener(e -> showHomeScreen());
         btnClient.addActionListener(e -> showRegisterClientScreen());
 
+        btnRegister.addActionListener(e -> {
+            //recovery of the fields
+            String name = nameInput.getText();
+            String cnpj = cnpjInput.getText();
+            String password = passwordInput.getText();
+            int x, y;
+
+            try {
+                x = Integer.parseInt(xInput.getText());
+                y = Integer.parseInt(yInput.getText());
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(null, "Por favor, insira valores inteiros válidos para x e y.");
+                return;
+            }
+
+            if (name.isEmpty() || cnpj.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
+            }
+
+            else{
+                Restaurant restaurant = new Restaurant(name, cnpj, password, x, y);
+                Application.restaurants.add(restaurant);
+
+                dispose(); // Close the current screen
+                showHomeRestaurant(); // Show restaurants list screen
+            }
+        });
+    }
+
+    public void open() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(656, 480);
         setLocationRelativeTo(null);
         setLayout(null);
         setVisible(true);
+    }
+
+    private void showHomeRestaurant() {
+        HomeRestaurantScreen homeRestaurant = new HomeRestaurantScreen();
+        homeRestaurant.open();
     }
 
     private void showHomeScreen() {
@@ -74,10 +109,6 @@ public class RegisterRestaurantScreen extends JFrame {
     private void showRegisterClientScreen() {
         dispose(); // Close the current screen
         RegisterClientScreen registerClientScreen = new RegisterClientScreen();
-        registerClientScreen.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(RegisterRestaurantScreen::new);
+        registerClientScreen.open();
     }
 }

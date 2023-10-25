@@ -9,15 +9,14 @@ import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class LoginClientScreen extends JFrame {
     Button btnLogin, btnHome, btnInfos;
     Input cpfInput, passwordInput;
     JLabel background;
+
+    Container frame = getContentPane();
 
     public LoginClientScreen() {
         super("App Delivery - Login Client");
@@ -39,9 +38,7 @@ public class LoginClientScreen extends JFrame {
     }
 
     public void initializeComponents() {
-        Container frame = getContentPane();
         frame.setLayout(null);
-
         ImageIcon wallpaper = new ImageIcon(
                 Objects.requireNonNull(getClass().getResource("../Images/login_do_cliente.png")));
         background = new JLabel(wallpaper);
@@ -77,17 +74,18 @@ public class LoginClientScreen extends JFrame {
             }
 
             else {
-                // Login falhou
-                // Exiba uma mensagem de erro ou ação apropriada
-                System.out.println("o login deu ruim");
+                JOptionPane.showMessageDialog(null, "Usuário não encontrado");
             }
         });
+    }
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(656, 480);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        setVisible(true);
+    public void open(){
+        LoginClientScreen frame = new LoginClientScreen();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(656, 480);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 
     private void showHomeScreen() {
@@ -100,9 +98,5 @@ public class LoginClientScreen extends JFrame {
         dispose(); // Close the current screen
         InfosScreen infosScreen = new InfosScreen();
         infosScreen.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginClientScreen::new);
     }
 }

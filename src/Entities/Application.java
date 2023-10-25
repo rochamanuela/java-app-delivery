@@ -1,6 +1,9 @@
 package Entities;
 
 import Screens.LoginClientScreen;
+import Screens.LoginRestaurantScreen;
+import Screens.RegisterClientScreen;
+import Screens.RegisterRestaurantScreen;
 
 import java.util.ArrayList;
 
@@ -24,7 +27,16 @@ public class Application {
         
         restaurants.add(defaultRestaurant);
         
-        LoginClientScreen loginClient = new LoginClientScreen();
-        loginClient.initializeComponents();
+//        LoginClientScreen loginClient = new LoginClientScreen();
+//        loginClient.open();
+
+//        LoginRestaurantScreen loginRestaurant = new LoginRestaurantScreen();
+//        loginRestaurant.open();
+
+//        RegisterClientScreen registerClient = new RegisterClientScreen();
+//        registerClient.open();
+
+        RegisterRestaurantScreen registerRestaurant = new RegisterRestaurantScreen();
+        registerRestaurant.open();
     }
 }

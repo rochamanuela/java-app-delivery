@@ -1,19 +1,21 @@
 package Screens;
 import Components.Button;
 import Components.Input;
+import Entities.Application;
+import Entities.Client;
+import Entities.Restaurant;
 
 import java.awt.Container;
 import java.util.Objects;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class LoginRestaurantScreen extends JFrame {
     Button btnLogin, btnHome, btnInfos;
-    Input cnpjInput, senhaInput;
+    Input cnpjInput, passwordInput;
     JLabel background;
+
+    Container frame = getContentPane();
 
     public LoginRestaurantScreen(){
         super("App Delivery - Login Restaurant");
@@ -35,7 +37,6 @@ public class LoginRestaurantScreen extends JFrame {
     }
 
     private void initializeComponents(){
-        Container frame = getContentPane();
         frame.setLayout(null);
 
         ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/login_do_restaurante.png")));
@@ -45,7 +46,7 @@ public class LoginRestaurantScreen extends JFrame {
 
         String placeholderText = "Digite algo aqui";
         cnpjInput = createInput(background, 235, 181, 190, 35, placeholderText);
-        senhaInput = createInput(background, 235, 246, 190, 35, "senha");
+        passwordInput = createInput(background, 235, 246, 190, 35, "senha");
 
         btnLogin = createButton(background, 219, 301, 201, 35);
         btnHome = createButton(background, 40, 37, 34, 34);
@@ -55,11 +56,39 @@ public class LoginRestaurantScreen extends JFrame {
         btnHome.addActionListener(e -> showHomeScreen());
         btnInfos.addActionListener(e -> showInfosScreen());
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(656, 480);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        setVisible(true);
+        // Add action listener to functional buttos: Login
+        btnLogin.addActionListener(e -> {
+            String cnpj = cnpjInput.getText();
+            String password = passwordInput.getText();
+
+            System.out.println("CNPJ: " + cnpj + " Senha: " + password);
+
+            Restaurant loginRestaurant = new Restaurant(null, cnpj, password, 0, 0);
+            if (Application.restaurants.contains(loginRestaurant)) {
+                System.out.println("Login bem-sucedido");
+
+                dispose(); // Close the current screen
+                showHomeRestaurant(); // Show home restaurant screen
+            }
+
+            else {
+                JOptionPane.showMessageDialog(null, "Usuário não encontrado");
+            }
+        });
+    }
+
+    public void open(){
+        LoginRestaurantScreen frame = new LoginRestaurantScreen();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(656, 480);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    private void showHomeRestaurant() {
+        HomeRestaurantScreen homeRestaurant = new HomeRestaurantScreen();
+        homeRestaurant.open();
     }
 
     private void showHomeScreen() {
@@ -72,9 +101,5 @@ public class LoginRestaurantScreen extends JFrame {
         dispose(); // Close the current screen
         InfosScreen infosScreen = new InfosScreen();
         infosScreen.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginRestaurantScreen::new);
     }
 }

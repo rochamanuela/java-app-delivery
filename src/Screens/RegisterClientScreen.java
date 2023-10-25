@@ -1,19 +1,20 @@
 package Screens;
 import Components.Button;
 import Components.Input;
+import Entities.Application;
+import Entities.Client;
 
 import java.awt.Container;
 import java.util.Objects;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class RegisterClientScreen extends JFrame {
     Button btnRegister, btnHome, btnRestaurant;
-    Input senhaInput, nameInput, cpfInput, xInput, yInput;
+    Input passwordInput, nameInput, cpfInput, xInput, yInput;
     JLabel background;
+
+    Container frame = getContentPane();
 
     public RegisterClientScreen(){
         super("App Delivery - Register Client");
@@ -35,7 +36,6 @@ public class RegisterClientScreen extends JFrame {
     }
 
     private void initializeComponents(){
-        Container frame = getContentPane();
         frame.setLayout(null);
 
         ImageIcon wallpaper = new ImageIcon(Objects.requireNonNull(getClass().getResource("../Images/cadastrar_cliente.png")));
@@ -46,7 +46,7 @@ public class RegisterClientScreen extends JFrame {
         String placeholderText = "Digite algo aqui";
         nameInput = createInput(background, 298, 109, 289, 35, placeholderText);
         cpfInput = createInput(background, 298, 174, 163, 35, "cpf");
-        senhaInput = createInput(background, 450, 174, 163, 35, "senha");
+        passwordInput = createInput(background, 450, 174, 163, 35, "senha");
         xInput = createInput(background, 298, 237, 163, 35, "x");
         yInput = createInput(background, 450, 237, 163, 35, "y");
 
@@ -58,11 +58,42 @@ public class RegisterClientScreen extends JFrame {
         btnHome.addActionListener(e -> showHomeScreen());
         btnRestaurant.addActionListener(e -> showRegisterRestaurantScreen());
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(656, 480);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        setVisible(true);
+        btnRegister.addActionListener(e -> {
+            //recovery of the fields
+            String name = nameInput.getText();
+            String cpf = cpfInput.getText();
+            String password = passwordInput.getText();
+            int x, y;
+
+            try {
+                x = Integer.parseInt(xInput.getText());
+                y = Integer.parseInt(yInput.getText());
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(null, "Por favor, insira valores inteiros válidos para x e y.");
+                return;
+            }
+
+            if (name.isEmpty() || cpf.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
+            }
+
+            else{
+                Client client = new Client(name, cpf, password, x, y);
+                Application.clients.add(client);
+
+                dispose(); // Close the current screen
+                showListRestaurants(); // Show restaurants list screen
+            }
+        });
+    }
+
+    public void open() {
+        RegisterClientScreen frame = new RegisterClientScreen();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(656, 480);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 
     private void showHomeScreen() {
@@ -71,13 +102,14 @@ public class RegisterClientScreen extends JFrame {
         homeScreen.setVisible(true);
     }
 
+    private void showListRestaurants() {
+        RestaurantsListScreen restaurantsList = new RestaurantsListScreen();
+        restaurantsList.open();
+    }
+
     private void showRegisterRestaurantScreen() {
         dispose(); // Close the current screen
         RegisterRestaurantScreen registerRestaurantScreen = new RegisterRestaurantScreen();
-        registerRestaurantScreen.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(RegisterClientScreen::new);
+        registerRestaurantScreen.open();
     }
 }
