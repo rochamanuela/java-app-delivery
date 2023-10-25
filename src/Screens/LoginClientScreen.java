@@ -16,15 +16,12 @@ import javax.swing.SwingUtilities;
 
 public class LoginClientScreen extends JFrame {
     Button btnLogin, btnHome, btnInfos;
-    Input cnpjInput, passwordInput;
+    Input cpfInput, passwordInput;
     JLabel background;
 
     public LoginClientScreen() {
         super("App Delivery - Login Client");
         initializeComponents();
-    }
-
-    public LoginClientScreen(ArrayList<Client> clients) {
     }
 
     public Button createButton(JLabel label, int x, int y, int width, int height) {
@@ -46,13 +43,13 @@ public class LoginClientScreen extends JFrame {
         frame.setLayout(null);
 
         ImageIcon wallpaper = new ImageIcon(
-        Objects.requireNonNull(getClass().getResource("../Images/login_do_cliente.png")));
+                Objects.requireNonNull(getClass().getResource("../Images/login_do_cliente.png")));
         background = new JLabel(wallpaper);
         background.setBounds(-5, -20, 656, 480);
         frame.add(background);
 
         String placeholderText = "Digite algo aqui";
-        cnpjInput = createInput(background, 235, 181, 190, 35, placeholderText);
+        cpfInput = createInput(background, 235, 181, 190, 35, placeholderText);
         passwordInput = createInput(background, 235, 246, 190, 35, "senha");
 
         btnLogin = createButton(background, 219, 301, 201, 35);
@@ -65,22 +62,21 @@ public class LoginClientScreen extends JFrame {
 
         // Add action listener to functional buttos: Login
         btnLogin.addActionListener(e -> {
-            String cpf = cnpjInput.getText();
+            String cpf = cpfInput.getText();
             String password = passwordInput.getText();
 
             System.out.println("CPF: " + cpf + " Senha: " + password);
 
-            if (Application.clients.contains(new Client(null, cpf, password, 0, 0))) {
-                // Login bem-sucedido
-                // Execute ação de login
-                // Por exemplo: new HomeScreen(authenticatedClient).setVisible(true);
-                System.out.println("o login deu certo");
-                
+            Client loginClient = new Client(null, cpf, password, 0, 0);
+            if (Application.clients.contains(loginClient)) {
+                System.out.println("Login bem-sucedido");
+
                 dispose(); // Close the current screen
                 InfosScreen infosScreen = new InfosScreen();
                 infosScreen.setVisible(true);
-                
-            } else {
+            }
+
+            else {
                 // Login falhou
                 // Exiba uma mensagem de erro ou ação apropriada
                 System.out.println("o login deu ruim");
@@ -93,9 +89,6 @@ public class LoginClientScreen extends JFrame {
         setLayout(null);
         setVisible(true);
     }
-
-    
-    
 
     private void showHomeScreen() {
         dispose(); // Close the current screen

@@ -24,4 +24,8 @@ public class Dish {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public String itemMenu() {
+        return name + "---> R$ " + price;
+    }
 }

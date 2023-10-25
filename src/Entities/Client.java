@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.Objects;
+
 public class Client {
     // this is the class that corresponds to the user class
     private String name, cpf, password;
@@ -34,35 +36,15 @@ public class Client {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return password.equals(client.getPassword()) && cpf.equals(client.getCpf());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Client other = (Client) obj;
-        if (cpf == null) {
-            if (other.cpf != null)
-                return false;
-        } else if (!cpf.equals(other.cpf))
-            return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(getPassword(), getCpf());
     }
-    
-    
 }
