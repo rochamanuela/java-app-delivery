@@ -26,4 +26,12 @@ public class Order {
     public void printOrder() {
         
     }
+
+    public void calculateDeliveryFee() {
+        double price;
+
+        int distance;
+        int[] adressClient = {10, 20};
+        int[] adressRestaurant = {10, 20};
+    }
 }

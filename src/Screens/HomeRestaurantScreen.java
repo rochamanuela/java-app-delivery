@@ -62,7 +62,7 @@ public class HomeRestaurantScreen extends JFrame {
     private void showRegisterDishScreen() {
         dispose(); // Close the current screen
         RegisterDishScreen registerDishScreen = new RegisterDishScreen();
-        registerDishScreen.setVisible(true);
+        registerDishScreen.open();
     }
 
     public static void main(String[] args) {

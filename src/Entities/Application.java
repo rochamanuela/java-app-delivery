@@ -19,12 +19,9 @@ public class Application {
     public Application() {
         
         Client defaultClient = new Client(null, "adminClient" , "admin123", 0, 0);
-        Client manu = new Client(null, "manu" , "manu123", 0, 0);
         Restaurant defaultRestaurant = new Restaurant(null, "adminRestaurant", "admin123", 0, 0);
         
-        clients.add(defaultClient);
-        clients.add(manu);
-        
+        clients.add(defaultClient);        
         restaurants.add(defaultRestaurant);
         
 //        LoginClientScreen loginClient = new LoginClientScreen();

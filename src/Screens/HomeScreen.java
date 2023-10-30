@@ -58,25 +58,25 @@ public class HomeScreen extends JFrame {
     private void showLoginRestaurantScreen() {
         dispose(); // Close the current screen
         LoginRestaurantScreen loginRestaurant = new LoginRestaurantScreen();
-        loginRestaurant.setVisible(true);
+        loginRestaurant.open();
     }
 
     private void showRegisterRestaurantScreen() {
         dispose(); // Close the current screen
         RegisterRestaurantScreen registerRestaurant = new RegisterRestaurantScreen();
-        registerRestaurant.setVisible(true);
+        registerRestaurant.open();
     }
 
     private void showLoginClientScreen() {
         dispose(); // Close the current screen
         LoginClientScreen loginClient = new LoginClientScreen();
-        loginClient.setVisible(true);
+        loginClient.open();
     }
 
     private void showRegisterClientScreen() {
         dispose(); // Close the current screen
         RegisterClientScreen registerClient = new RegisterClientScreen();
-        registerClient.setVisible(true);
+        registerClient.open();
     }
 
     public static void main(String[] args) {
