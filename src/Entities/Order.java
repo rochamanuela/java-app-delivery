@@ -3,35 +3,82 @@ package Entities;
 import java.util.ArrayList;
 
 public class Order {
-    private ArrayList<Restaurant> restaurants = new ArrayList<>();
-    private ArrayList<Client> clients = new ArrayList<>();
+    private String restaurant;
+    private String client;
+
+    public static ArrayList<Dish> orderItems;
     
-    public Order(ArrayList<Restaurant> restaurants, ArrayList<Client> clients) {
-        this.restaurants = restaurants;
-        this.clients = clients;
+    public Order(String restaurantName, String clientName) {
+        this.restaurant = restaurantName;
+        this.client = clientName;
     }
 
-    public ArrayList<Restaurant> getRestaurants() {
-        return restaurants;
+    public String getRestaurant() {
+        return restaurant;
     }
 
-    public ArrayList<Client> getClients() {
-        return clients;
+    public String getClient() {
+        return client;
+    }
+
+    public double makeOrder() {
+        // post-it realização de pedidos e cálculo do valor dos alimentos
+
+        double totalItems = 0.0;
+
+        for (Dish item : orderItems) {
+            totalItems = totalItems + item.getPrice();
+        }
+
+        return totalItems;
     }
     
-    public void makeOrder() {
+    public double calculateDeliveryFee() {
+        double distance, distanceX, distanceY, fee;
+        
+        int[] adressClient = {0, 10};
+        int[] adressRestaurant = {8, 0};
+        
+        distanceX = Math.abs(adressClient[0] - adressRestaurant[0]);
+        distanceY = Math.abs(adressClient[1] - adressRestaurant[1]);
+        distance = Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+        
+        fee = 2 + (distance * 0.5);
+        
+        return fee;
+    }
+    
+    public double calculateTotal () {
+        // vai usar o resultados vindos de makeOrder() e de calculateDeliveryFee()
+        double fee = calculateDeliveryFee();
+        double itens = makeOrder();
+        double totalPurchase = fee + itens;
 
+        return totalPurchase;
+    }
+
+    public void printStrokes() {
+        for (int i = 0; i < 25; i++) 
+            System.out.print("-=");
     }
 
     public void printOrder() {
-        
-    }
+        // post-it emissão da NF
 
-    public void calculateDeliveryFee() {
-        double price;
+        printStrokes();
+        System.out.format("%-30s%-15s%n", "Item", "Valor");
+        for (Dish item : orderItems) {
+            System.out.format("%-30s%-15s%n", item.getName(), "R$ " + item.getPrice());
+        }
+        printStrokes();
 
-        int distance;
-        int[] adressClient = {10, 20};
-        int[] adressRestaurant = {10, 20};
+        String totalItems = String.format("%-30s%-15s%n", "Valor dos itens", "R$ %.2f" + makeOrder());
+        System.out.println(totalItems);
+
+        String feeText = String.format("%-30s%-15s%n", "Taxa de entrega", "R$ %.2f" + calculateDeliveryFee());
+        System.out.println(feeText);
+
+        String totalPurchase = String.format("%-30s%-15s%n", "Total da compra", "R$ %.2f" + calculateTotal());
+        System.out.println(totalPurchase);
     }
 }

@@ -1,11 +1,8 @@
 package Entities;
 
-import Screens.LoginClientScreen;
-import Screens.LoginRestaurantScreen;
-import Screens.RegisterClientScreen;
-import Screens.RegisterRestaurantScreen;
-
 import java.util.ArrayList;
+
+import Screens.HomeScreen;
 
 public class Application {
     public static ArrayList<Client> clients = new ArrayList<>();
@@ -20,20 +17,11 @@ public class Application {
         
         Client defaultClient = new Client(null, "adminClient" , "admin123", 0, 0);
         Restaurant defaultRestaurant = new Restaurant(null, "adminRestaurant", "admin123", 0, 0);
-        
+                
         clients.add(defaultClient);        
         restaurants.add(defaultRestaurant);
-        
-//        LoginClientScreen loginClient = new LoginClientScreen();
-//        loginClient.open();
 
-//        LoginRestaurantScreen loginRestaurant = new LoginRestaurantScreen();
-//        loginRestaurant.open();
-
-//        RegisterClientScreen registerClient = new RegisterClientScreen();
-//        registerClient.open();
-
-        RegisterRestaurantScreen registerRestaurant = new RegisterRestaurantScreen();
-        registerRestaurant.open();
+        HomeScreen homeScreen = new HomeScreen();
+        homeScreen.setVisible(true);
     }
 }

@@ -81,6 +81,9 @@ public class RegisterClientScreen extends JFrame {
                 Client client = new Client(name, cpf, password, x, y);
                 Application.clients.add(client);
 
+                // starting the section before switching screens, so that the login is not lost
+                Application.clientSession = client;
+
                 dispose(); // Close the current screen
                 showListRestaurants(); // Show restaurants list screen
             }

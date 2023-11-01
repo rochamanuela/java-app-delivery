@@ -79,31 +79,6 @@ public class RegisterDishScreen extends JFrame {
             String name = nameDishInput.getText();
             double price;
 
-            /*
-             * try {
-             * price = Double.parseDouble(priceDishInput.getText());
-             * } catch (NumberFormatException exception) {
-             * JOptionPane.showMessageDialog(null,
-             * "Por favor, insira um valor numérico para o preço do prato.");
-             * return;
-             * }
-             * 
-             * if (name.isEmpty())
-             * JOptionPane.showMessageDialog(null,
-             * "Por favor, defina um nome para seu prato.");
-             * if (price <= 0)
-             * JOptionPane.showMessageDialog(null,
-             * "O preço do prato deve ser um valor positivo válido.");
-             * else {
-             * Dish dish = new Dish(name, price);
-             * Application.dishes.add(dish);
-             * 
-             * // adicionando o prato na lista local
-             * dishList.add(dish);
-             * updateList();
-             * }
-             */
-
             if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor, defina um nome para seu prato.");
                 return;
@@ -120,25 +95,20 @@ public class RegisterDishScreen extends JFrame {
                 return;
             }
 
-            System.out.println("Antes de adicionar o prato ao restaurante");
             if (Application.restaurantSession != null) {
-                System.out.println("RestaurantSession não é nulo.");
                 if (Application.restaurantSession.dishes != null) {
-                    System.out.println("RestaurantSession possui uma lista de pratos.");
-
+                    // adicionando o prato na lista da classe Dish
                     Dish dish = new Dish(name, price);
                     Application.restaurantSession.dishes.add(dish);
 
                     // adicionando o prato na lista local
                     dishList.add(dish);
                     updateList();
-
-                    System.out.println("Prato adicionado com sucesso.");
                 } else {
-                    System.out.println("RestaurantSession.dishes é nulo.");
+                    System.out.println("Erro ao executar a operação. A lista de pratos é nula");
                 }
             } else {
-                System.out.println("RestaurantSession é nulo.");
+                System.out.println("Erro ao executar a operação. RestaurantSession é nulo.");
             }
 
         });
@@ -154,8 +124,6 @@ public class RegisterDishScreen extends JFrame {
 
         table.revalidate();
         table.repaint();
-
-        System.out.println("eu cheguei aqui");
     }
 
     public void open() {
@@ -181,8 +149,8 @@ public class RegisterDishScreen extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                RegisterDishScreen tela = new RegisterDishScreen();
-                tela.open();
+                RegisterDishScreen screen = new RegisterDishScreen();
+                screen.open();
             }
         });
     }

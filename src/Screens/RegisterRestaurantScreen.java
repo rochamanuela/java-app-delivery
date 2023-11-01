@@ -81,8 +81,11 @@ public class RegisterRestaurantScreen extends JFrame {
                 Restaurant restaurant = new Restaurant(name, cnpj, password, x, y);
                 Application.restaurants.add(restaurant);
 
+                // starting the section before switching screens, so that the login is not lost
+                Application.restaurantSession = restaurant;
+
                 dispose(); // Close the current screen
-                showHomeRestaurant(); // Show restaurants list screen
+                showHomeRestaurant();
             }
         });
     }

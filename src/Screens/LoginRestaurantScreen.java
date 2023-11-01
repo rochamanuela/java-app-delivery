@@ -2,7 +2,6 @@ package Screens;
 import Components.Button;
 import Components.Input;
 import Entities.Application;
-import Entities.Client;
 import Entities.Restaurant;
 
 import java.awt.Container;
@@ -67,12 +66,14 @@ public class LoginRestaurantScreen extends JFrame {
             if (Application.restaurants.contains(loginRestaurant)) {
                 System.out.println("Login bem-sucedido");
 
+                Application.restaurantSession = loginRestaurant;
+
                 dispose(); // Close the current screen
                 showHomeRestaurant(); // Show home restaurant screen
             }
 
             else {
-                JOptionPane.showMessageDialog(null, "Usuário não encontrado");
+                JOptionPane.showMessageDialog(null, "Restaurante não encontrado");
             }
         });
     }

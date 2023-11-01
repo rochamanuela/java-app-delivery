@@ -1,7 +1,5 @@
 package Screens;
 import Components.Button;
-import Components.Input;
-
 import java.awt.Container;
 import java.util.Objects;
 

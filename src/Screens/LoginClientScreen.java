@@ -6,7 +6,6 @@ import Entities.Application;
 import Entities.Client;
 
 import java.awt.Container;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import javax.swing.*;
@@ -67,6 +66,8 @@ public class LoginClientScreen extends JFrame {
             Client loginClient = new Client(null, cpf, password, 0, 0);
             if (Application.clients.contains(loginClient)) {
                 System.out.println("Login bem-sucedido");
+
+                Application.clientSession = loginClient;
 
                 dispose(); // Close the current screen
                 InfosScreen infosScreen = new InfosScreen();
