@@ -3,24 +3,20 @@ package Entities;
 import java.util.ArrayList;
 
 public class Order {
-    private String restaurant;
-    private String client;
-
     public static ArrayList<Dish> orderItems;
     
-    public Order(String restaurantName, String clientName) {
-        this.restaurant = restaurantName;
-        this.client = clientName;
+    public Order(){
+        orderItems = new ArrayList<>();
     }
 
-    public String getRestaurant() {
-        return restaurant;
+    public static ArrayList<Dish> getOrderItems() {
+        return orderItems;
     }
 
-    public String getClient() {
-        return client;
+    public static void setOrderItems(ArrayList<Dish> orderItems) {
+        Order.orderItems = orderItems;
     }
-
+    
     public double makeOrder() {
         // post-it realização de pedidos e cálculo do valor dos alimentos
 

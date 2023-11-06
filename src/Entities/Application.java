@@ -14,7 +14,6 @@ public class Application {
     public static ArrayList<Dish> dishes = new ArrayList<>();
     
     public Application() {
-        
         Client defaultClient = new Client(null, "adminClient" , "admin123", 0, 0);
         Restaurant defaultRestaurant = new Restaurant(null, "adminRestaurant", "admin123", 0, 0);
                 
